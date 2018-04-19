@@ -8,9 +8,10 @@ tickrate = 64
 screen = pygame.display.set_mode([600, 400])
 done = False
 
-ballVector = [5, 0]
+ballVector = [-5, 0]
 player1 = 110
 player2 = 110
+
 
 
 black = [0, 0, 0]
@@ -24,6 +25,11 @@ while not done:
             done = True
 
     #Game logic here
+    #Some definitions...
+    hitbox1 = [player1, player1 + 50]
+    hitbox2 = [player2, player2 + 50]
+
+
     #Controls
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_UP] and player1 != 0:
@@ -36,6 +42,14 @@ while not done:
     elif pressed[pygame.K_s] and player2 != 350:
         player2 += 10
 
+    #Checking collisions
+    if ballCoor[0] == 10 and ballCoor[1] in range(hitbox1[0], hitbox1[1]):
+        ballVector[0] = (-1)*ballVector[0]
+    elif ballCoor[0] == 580 and ballCoor[1] in range(hitbox2[0], hitbox2[1]):
+        ballVector[0] = (-1)*ballVector[0]
+
+
+    #Ball moves
     ballCoor[0] += ballVector[0]
     ballCoor[1] += ballVector[1]
 
