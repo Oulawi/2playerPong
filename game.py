@@ -9,16 +9,20 @@ tickrate = 64
 screen = pygame.display.set_mode([600, 400])
 done = False
 
+player1Score = 0
+player2Score = 0
+
 ballVector = [-8, 0]
 player1 = 110
 player2 = 110
 
-player1Score = 0
-player2Score = 0
+
 
 def ball_reset():
+    ballVector = [0, 0]
     ballCoor[0] = 300
     ballCoor[1] = 200
+    pygame.time.wait(1500)
     ballVector[0] = 8 * (-1)**randint(1,2)
 
 
@@ -88,7 +92,6 @@ while not done:
     #draw paddles
     pygame.draw.rect(screen, white, pygame.Rect(0, player1, 10, 60))
     pygame.draw.rect(screen, white, pygame.Rect(590, player2, 10, 60))
-
 
     #Draw midline
     pygame.draw.rect(screen, white, pygame.Rect(290, 0, 2, 400))
