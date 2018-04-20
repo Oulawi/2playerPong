@@ -141,7 +141,7 @@ done = False
 player1Score = 0
 player2Score = 0
 
-ballVector = [-8, 0]
+ballVector = [-10, 0]
 player1 = 110
 player2 = 110
 
@@ -152,7 +152,7 @@ def ball_reset():
     ballCoor[0] = 300
     ballCoor[1] = 200
     pygame.time.wait(1500)
-    ballVector[0] = 8 * (-1)**randint(1,2)
+    ballVector[0] = 10 * (-1)**randint(1,2)
 
 
 
@@ -226,7 +226,11 @@ while not done:
     pygame.draw.rect(screen, white, pygame.Rect(299, 0, 2, 400))
 
     draw_score(player1Score, player2Score)
+    if player1Score == 10 or player2Score == 10:
+        done = True
 
     pygame.display.update()
     pygame.display.flip()
     clock.tick(tickrate)
+
+pygame.quit()
