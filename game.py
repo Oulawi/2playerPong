@@ -6,7 +6,7 @@ pygame.display.set_caption("Multiplayer Pong Courtesy of Olavi")
 
 def draw_score(score1, score2):
 
-    leftCorner = [240, 60]
+    leftCorner = [324, 60]
 
     upLeft1 = pygame.Rect(leftCorner[0], leftCorner[1] + 6, 6, 24)
     downLeft1 = pygame.Rect(leftCorner[0], leftCorner[1] + 36, 6, 24)
@@ -15,15 +15,62 @@ def draw_score(score1, score2):
     downRight1 = pygame.Rect(leftCorner[0] + 30, leftCorner[1] + 36, 6, 24)
     mid1 = pygame.Rect(leftCorner[0] + 6, leftCorner[1] + 30, 24, 6)
     down1 = pygame.Rect(leftCorner[0] + 6, leftCorner[1] + 60, 24, 6)
-    pygame.draw.rect(screen, white, upLeft1)
-    pygame.draw.rect(screen, white, downLeft1)
-    pygame.draw.rect(screen, white, up1)
-    pygame.draw.rect(screen, white, upRight1)
-    pygame.draw.rect(screen, white, downRight1)
-    pygame.draw.rect(screen, white, mid1)
-    pygame.draw.rect(screen, white, down1)
 
-    rightCorner = [324, 60]
+    if score1 == 1:
+        pygame.draw.rect(screen, white, upLeft1)
+        pygame.draw.rect(screen, white, downLeft1)
+    elif score1 == 2:
+        pygame.draw.rect(screen, white, up1)
+        pygame.draw.rect(screen, white, mid1)
+        pygame.draw.rect(screen, white, down1)
+        pygame.draw.rect(screen, white, upRight1)
+        pygame.draw.rect(screen, white, downLeft1)
+    elif score1 == 3:
+        pygame.draw.rect(screen, white, up1)
+        pygame.draw.rect(screen, white, mid1)
+        pygame.draw.rect(screen, white, down1)
+        pygame.draw.rect(screen, white, upRight1)
+        pygame.draw.rect(screen, white, downRight1)
+    elif score1 == 4:
+        pygame.draw.rect(screen, white, upLeft1)
+        pygame.draw.rect(screen, white, upRight1)
+        pygame.draw.rect(screen, white, mid1)
+        pygame.draw.rect(screen, white, downRight1)
+    elif score1 == 5:
+        pygame.draw.rect(screen, white, up1)
+        pygame.draw.rect(screen, white, upLeft1)
+        pygame.draw.rect(screen, white, mid1)
+        pygame.draw.rect(screen, white, downRight1)
+        pygame.draw.rect(screen, white, down1)
+    elif score1 == 6:
+        pygame.draw.rect(screen, white, up1)
+        pygame.draw.rect(screen, white, upLeft1)
+        pygame.draw.rect(screen, white, mid1)
+        pygame.draw.rect(screen, white, downRight1)
+        pygame.draw.rect(screen, white, downLeft1)
+        pygame.draw.rect(screen, white, down1)
+    elif score1 == 7:
+        pygame.draw.rect(screen, white, up1)
+        pygame.draw.rect(screen, white, downRight1)
+        pygame.draw.rect(screen, white, upRight1)
+    elif score1 == 8:
+        pygame.draw.rect(screen, white, upLeft1)
+        pygame.draw.rect(screen, white, downLeft1)
+        pygame.draw.rect(screen, white, up1)
+        pygame.draw.rect(screen, white, upRight1)
+        pygame.draw.rect(screen, white, downRight1)
+        pygame.draw.rect(screen, white, mid1)
+        pygame.draw.rect(screen, white, down1)
+    elif score1 == 9:
+        pygame.draw.rect(screen, white, upLeft1)
+        pygame.draw.rect(screen, white, up1)
+        pygame.draw.rect(screen, white, upRight1)
+        pygame.draw.rect(screen, white, downRight1)
+        pygame.draw.rect(screen, white, mid1)
+        pygame.draw.rect(screen, white, down1)
+
+
+    rightCorner = [240, 60]
 
     upLeft2 = pygame.Rect(rightCorner[0], rightCorner[1] + 6, 6, 24)
     downLeft2 = pygame.Rect(rightCorner[0], rightCorner[1] + 36, 6, 24)
@@ -32,13 +79,59 @@ def draw_score(score1, score2):
     downRight2 = pygame.Rect(rightCorner[0] + 30, rightCorner[1] + 36, 6, 24)
     mid2 = pygame.Rect(rightCorner[0] + 6, rightCorner[1] + 30, 24, 6)
     down2 = pygame.Rect(rightCorner[0] + 6, rightCorner[1] + 60, 24, 6)
-    pygame.draw.rect(screen, white, upLeft2)
-    pygame.draw.rect(screen, white, downLeft2)
-    pygame.draw.rect(screen, white, up2)
-    pygame.draw.rect(screen, white, upRight2)
-    pygame.draw.rect(screen, white, downRight2)
-    pygame.draw.rect(screen, white, mid2)
-    pygame.draw.rect(screen, white, down2)
+
+    if score2 == 1:
+        pygame.draw.rect(screen, white, upRight2)
+        pygame.draw.rect(screen, white, downRight2)
+    elif score2 == 2:
+        pygame.draw.rect(screen, white, up2)
+        pygame.draw.rect(screen, white, mid2)
+        pygame.draw.rect(screen, white, down2)
+        pygame.draw.rect(screen, white, upRight2)
+        pygame.draw.rect(screen, white, downLeft2)
+    elif score2 == 3:
+        pygame.draw.rect(screen, white, up2)
+        pygame.draw.rect(screen, white, mid2)
+        pygame.draw.rect(screen, white, down2)
+        pygame.draw.rect(screen, white, upRight2)
+        pygame.draw.rect(screen, white, downRight2)
+    elif score2 == 4:
+        pygame.draw.rect(screen, white, upLeft2)
+        pygame.draw.rect(screen, white, upRight2)
+        pygame.draw.rect(screen, white, mid2)
+        pygame.draw.rect(screen, white, downRight2)
+    elif score2 == 5:
+        pygame.draw.rect(screen, white, up2)
+        pygame.draw.rect(screen, white, upLeft2)
+        pygame.draw.rect(screen, white, mid2)
+        pygame.draw.rect(screen, white, downRight2)
+        pygame.draw.rect(screen, white, down2)
+    elif score2 == 6:
+        pygame.draw.rect(screen, white, up2)
+        pygame.draw.rect(screen, white, upLeft2)
+        pygame.draw.rect(screen, white, mid2)
+        pygame.draw.rect(screen, white, downRight2)
+        pygame.draw.rect(screen, white, downLeft2)
+        pygame.draw.rect(screen, white, down2)
+    elif score2 == 7:
+        pygame.draw.rect(screen, white, up2)
+        pygame.draw.rect(screen, white, downRight2)
+        pygame.draw.rect(screen, white, upRight2)
+    elif score2 == 8:
+        pygame.draw.rect(screen, white, upLeft2)
+        pygame.draw.rect(screen, white, downLeft2)
+        pygame.draw.rect(screen, white, up2)
+        pygame.draw.rect(screen, white, upRight2)
+        pygame.draw.rect(screen, white, downRight2)
+        pygame.draw.rect(screen, white, mid2)
+        pygame.draw.rect(screen, white, down2)
+    elif score2 == 9:
+        pygame.draw.rect(screen, white, upLeft2)
+        pygame.draw.rect(screen, white, up2)
+        pygame.draw.rect(screen, white, upRight2)
+        pygame.draw.rect(screen, white, downRight2)
+        pygame.draw.rect(screen, white, mid2)
+        pygame.draw.rect(screen, white, down2)
 
 clock = pygame.time.Clock()
 tickrate = 64
@@ -55,7 +148,7 @@ player2 = 110
 
 
 def ball_reset():
-    ballVector = [0, 0]
+    ballVector[1] = 0
     ballCoor[0] = 300
     ballCoor[1] = 200
     pygame.time.wait(1500)
