@@ -4,6 +4,42 @@ from random import randint
 pygame.init()
 pygame.display.set_caption("Multiplayer Pong Courtesy of Olavi")
 
+def draw_score(score1, score2):
+
+    leftCorner = [240, 60]
+
+    upLeft1 = pygame.Rect(leftCorner[0], leftCorner[1] + 6, 6, 24)
+    downLeft1 = pygame.Rect(leftCorner[0], leftCorner[1] + 36, 6, 24)
+    up1 = pygame.Rect(leftCorner[0] + 6, leftCorner[1], 24, 6)
+    upRight1 = pygame.Rect(leftCorner[0] + 30, leftCorner[1] + 6, 6, 24)
+    downRight1 = pygame.Rect(leftCorner[0] + 30, leftCorner[1] + 36, 6, 24)
+    mid1 = pygame.Rect(leftCorner[0] + 6, leftCorner[1] + 30, 24, 6)
+    down1 = pygame.Rect(leftCorner[0] + 6, leftCorner[1] + 60, 24, 6)
+    pygame.draw.rect(screen, white, upLeft1)
+    pygame.draw.rect(screen, white, downLeft1)
+    pygame.draw.rect(screen, white, up1)
+    pygame.draw.rect(screen, white, upRight1)
+    pygame.draw.rect(screen, white, downRight1)
+    pygame.draw.rect(screen, white, mid1)
+    pygame.draw.rect(screen, white, down1)
+
+    rightCorner = [324, 60]
+
+    upLeft2 = pygame.Rect(rightCorner[0], rightCorner[1] + 6, 6, 24)
+    downLeft2 = pygame.Rect(rightCorner[0], rightCorner[1] + 36, 6, 24)
+    up2 = pygame.Rect(rightCorner[0] + 6, rightCorner[1], 24, 6)
+    upRight2 = pygame.Rect(rightCorner[0] + 30, rightCorner[1] + 6, 6, 24)
+    downRight2 = pygame.Rect(rightCorner[0] + 30, rightCorner[1] + 36, 6, 24)
+    mid2 = pygame.Rect(rightCorner[0] + 6, rightCorner[1] + 30, 24, 6)
+    down2 = pygame.Rect(rightCorner[0] + 6, rightCorner[1] + 60, 24, 6)
+    pygame.draw.rect(screen, white, upLeft2)
+    pygame.draw.rect(screen, white, downLeft2)
+    pygame.draw.rect(screen, white, up2)
+    pygame.draw.rect(screen, white, upRight2)
+    pygame.draw.rect(screen, white, downRight2)
+    pygame.draw.rect(screen, white, mid2)
+    pygame.draw.rect(screen, white, down2)
+
 clock = pygame.time.Clock()
 tickrate = 64
 screen = pygame.display.set_mode([600, 400])
@@ -94,7 +130,9 @@ while not done:
     pygame.draw.rect(screen, white, pygame.Rect(590, player2, 10, 60))
 
     #Draw midline
-    pygame.draw.rect(screen, white, pygame.Rect(290, 0, 2, 400))
+    pygame.draw.rect(screen, white, pygame.Rect(299, 0, 2, 400))
+
+    draw_score(player1Score, player2Score)
 
     pygame.display.update()
     pygame.display.flip()
