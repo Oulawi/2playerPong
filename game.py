@@ -205,10 +205,10 @@ while not done:
     ballCoor[1] += ballVector[1]
 
     #Check win conditions
-    if ballCoor[0] <= 0:
+    if ballCoor[0] <= -10:
         player1Score += 1
         ball_reset()
-    elif ballCoor[0] >= 590:
+    elif ballCoor[0] >= 600:
         player2Score += 1
         ball_reset()
 
