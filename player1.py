@@ -1,14 +1,18 @@
 import pygame
 import socket
 
-ipadress = "180.158.85.44"
+inaddress = "127.0.0.1"
+outaddress = "127.0.0.1"
+
 inport = 5005
 outport = 5006
+
+print (socket.gethostname())
 
 insock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 outsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-insock.bind((ipadress, inport))
+insock.bind((inaddress, inport))
 
 pygame.init()
 pygame.display.set_caption("Multiplayer Pong Courtesy of Olavi")
@@ -186,12 +190,12 @@ while not done:
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_UP] and player1 != 0:
         player1 -= 10
-        outsock.sendto("up".encode(), (ipadress, outport))
+        outsock.sendto("up".encode(), (outaddress, outport))
     elif pressed[pygame.K_DOWN] and player1 != 340:
         player1 += 10
-        outsock.sendto("down".encode(), (ipadress, outport))
+        outsock.sendto("down".encode(), (outaddress, outport))
     else:
-        outsock.sendto("none".encode(), (ipadress, outport))
+        outsock.sendto("none".encode(), (outaddress, outport))
 
     #Listening for opponent input
     opponentInput = insock.recvfrom(1024)
