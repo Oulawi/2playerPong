@@ -14,6 +14,8 @@ outsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 insock.bind((inaddress, inport))
 
+socket.setdefaulttimeout(5)
+
 pygame.init()
 pygame.display.set_caption("Multiplayer Pong Courtesy of Olavi")
 
@@ -158,8 +160,6 @@ ballVector = [-10, 0]
 player1 = 110
 player2 = 110
 
-
-
 def ball_reset():
     ballVector[1] = 0
     ballCoor[0] = 300
@@ -181,31 +181,33 @@ while not done:
 
     #Game logic here
 
+
     #Some definitions...
     hitbox1 = [player1 - 10, player1 + 60]
     hitbox2 = [player2 - 10, player2 + 60]
 
+    #syncPackage preparation
+    syncInfo = str(ballVector + ballCoor).encode()
 
     #Controls
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_UP] and player1 != 0:
         player1 -= 10
-        outsock.sendto("up".encode(), (outaddress, outport))
+        outsock.sendto("u".encode() + syncInfo, (outaddress, outport))
     elif pressed[pygame.K_DOWN] and player1 != 340:
         player1 += 10
-        outsock.sendto("down".encode(), (outaddress, outport))
+        outsock.sendto("d".encode() + syncInfo, (outaddress, outport))
     else:
-        outsock.sendto("none".encode(), (outaddress, outport))
+        outsock.sendto("n".encode() + syncInfo, (outaddress, outport))
 
     #Listening for opponent input
     opponentInput = insock.recvfrom(1024)
     opponentCommand = opponentInput[0].decode()
 
-    if opponentCommand == "up" and player2 != 0:
+    if opponentCommand == "u" and player2 != 0:
         player2 -= 10
-    elif opponentCommand == "down" and player2 != 340:
+    elif opponentCommand == "d" and player2 != 340:
         player2 += 10
-
 
     #Checking collisions
     if ballCoor[0] <= 10 and ballCoor[1] in range(hitbox1[0], hitbox1[1]):
@@ -234,7 +236,6 @@ while not done:
     elif ballCoor[0] >= 600:
         player2Score += 1
         ball_reset()
-
 
     screen.fill(black)
     #Draw here

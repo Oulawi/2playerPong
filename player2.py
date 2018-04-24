@@ -12,6 +12,8 @@ outsock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 insock.bind((inaddress, inport))
 
+socket.setdefaulttimeout(2)
+
 pygame.init()
 pygame.display.set_caption("Multiplayer Pong Courtesy of Olavi")
 
@@ -156,7 +158,7 @@ ballVector = [-10, 0]
 player1 = 110
 player2 = 110
 
-
+initialConnect = False
 
 def ball_reset():
     ballVector[1] = 0
@@ -165,6 +167,27 @@ def ball_reset():
     pygame.time.wait(1500)
     ballVector[0] = -10
 
+def interpretSync(string):
+    syncCoor = []
+    syncVector = []
+    bufferString = ""
+    bufferCounter = 0
+    for i in string:
+        if i == "-":
+            bufferString += i
+        elif i == "1" or i == "2" or i == "3" or i == "4" or i == "5" or i == "6" or i == "7" or i == "8" or i == "9" or i == "0" or i == ".":
+            bufferString += i
+        elif i == "," and bufferCounter < 2:
+            syncVector.append(int(float(bufferString)))
+            bufferCounter += 1
+            bufferString = ""
+        elif i == "," and bufferCounter >= 2:
+            syncCoor.append(int(float(bufferString)))
+            bufferString = ""
+        elif i == "]":
+            syncCoor.append(int(float(bufferString)))
+            bufferString = ""
+    return (syncCoor, syncVector)
 
 
 black = [0, 0, 0]
@@ -187,21 +210,21 @@ while not done:
 
     if pressed[pygame.K_UP] and player2 != 0:
         player2 -= 10
-        outsock.sendto("up".encode(), (outaddress, outport))
+        outsock.sendto("u".encode(), (outaddress, outport))
     elif pressed[pygame.K_DOWN] and player2 != 340:
         player2 += 10
-        outsock.sendto("down".encode(), (outaddress, outport))
+        outsock.sendto("d".encode(), (outaddress, outport))
     else:
-        outsock.sendto("none".encode(), (outaddress, outport))
+        outsock.sendto("n".encode(), (outaddress, outport))
 
 
     #Listening for opponent
     opponentInput = insock.recvfrom(1024)
     opponentCommand = opponentInput[0].decode()
 
-    if opponentCommand == "up" and player1 != 0:
+    if opponentCommand[0] == "u" and player1 != 0:
         player1 -= 10
-    elif opponentCommand == "down" and player1 != 340:
+    elif opponentCommand[0] == "d" and player1 != 340:
         player1 += 10
 
     #Checking collisions
@@ -232,6 +255,11 @@ while not done:
         player2Score += 1
         ball_reset()
 
+    syncCheck = interpretSync(opponentCommand)
+    if syncCheck[0] != ballCoor:
+        ballCoor = syncCheck[0]
+    elif syncCheck[1] != ballVector:
+        ballVector = syncCheck[1]
 
     screen.fill(black)
     #Draw here
