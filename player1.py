@@ -1,8 +1,8 @@
 import pygame
 import socket
 
-inaddress = "127.0.0.1"
-outaddress = "127.0.0.1"
+inaddress = "0.0.0.0"
+outaddress = "172.22.197.22"
 
 inport = 5005
 outport = 5006
