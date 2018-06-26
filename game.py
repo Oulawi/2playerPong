@@ -134,7 +134,7 @@ def draw_score(score1, score2):
         pygame.draw.rect(screen, white, down2)
 
 clock = pygame.time.Clock()
-tickrate = 64
+tickrate = 28
 screen = pygame.display.set_mode([600, 400])
 done = False
 
@@ -188,10 +188,12 @@ while not done:
     if ballCoor[0] <= 10 and ballCoor[1] in range(hitbox1[0], hitbox1[1]):
         ballVector[0] = (-1)*ballVector[0]
         ballVector[1] = round((ballCoor[1] - ((hitbox1[0] + hitbox1[1])/2)) * 0.35, 0)
+        tickrate += 1
 
     elif ballCoor[0] >= 579 and ballCoor[1] in range(hitbox2[0] - 10, hitbox2[1] + 10):
         ballVector[0] = (-1)*ballVector[0]
         ballVector[1] = round((ballCoor[1] - ((hitbox2[0] + hitbox2[1]) / 2)) * 0.35, 0)
+        tickrate += 1
 
     #Edge collisions
     if ballCoor[1] <= 0:
@@ -208,9 +210,11 @@ while not done:
     if ballCoor[0] <= -10:
         player1Score += 1
         ball_reset()
+        tickrate = 28
     elif ballCoor[0] >= 600:
         player2Score += 1
         ball_reset()
+        tickrate = 28
 
 
     screen.fill(black)
