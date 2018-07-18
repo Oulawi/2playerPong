@@ -134,9 +134,13 @@ def draw_score(score1, score2):
         pygame.draw.rect(screen, white, down2)
 
 clock = pygame.time.Clock()
-tickrate = 28
+tickrate = 50
 screen = pygame.display.set_mode([600, 400])
 done = False
+
+rainbow = [[148, 0, 211],[75,0,130],[0,0,255],[0,255,0],[255,255,0],[255,127,0],[255,0,0]]
+rainbowticker = 0
+
 
 player1Score = 0
 player2Score = 0
@@ -217,21 +221,23 @@ while not done:
         tickrate = 28
 
 
-    screen.fill(black)
+    screen.fill(rainbow[rainbowticker % 7])
     #Draw here
     #draw ball
-    pygame.draw.rect(screen, white, pygame.Rect(ballCoor[0], ballCoor[1], 11, 11))
+    pygame.draw.rect(screen, rainbow[(rainbowticker + 1) % 7], pygame.Rect(ballCoor[0], ballCoor[1], 11, 11))
 
     #draw paddles
-    pygame.draw.rect(screen, white, pygame.Rect(0, player1, 10, 60))
-    pygame.draw.rect(screen, white, pygame.Rect(590, player2, 10, 60))
+    pygame.draw.rect(screen, rainbow[(rainbowticker + 2) % 7], pygame.Rect(0, player1, 10, 60))
+    pygame.draw.rect(screen, rainbow[(rainbowticker + 3) % 7], pygame.Rect(590, player2, 10, 60))
 
     #Draw midline
-    pygame.draw.rect(screen, white, pygame.Rect(299, 0, 2, 400))
+    pygame.draw.rect(screen, rainbow[(rainbowticker + 4) % 7], pygame.Rect(299, 0, 2, 400))
 
     draw_score(player1Score, player2Score)
     if player1Score == 10 or player2Score == 10:
         done = True
+
+    rainbowticker += 1
 
     pygame.display.update()
     pygame.display.flip()
